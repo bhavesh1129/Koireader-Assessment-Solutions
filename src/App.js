@@ -1,32 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 function App() {
 
-  const [images, setImages] = useState([]);
-  const [currImageIdx, setCurrImageIdx] = useState(0);
-
-  useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/photos')
-      .then(res => res.json())
-      .then(data => setImages(data))
-  }, []);
-
-  const handlePrevious = () => {
-    if (currImageIdx > 0) {
-      setCurrImageIdx(currImageIdx - 1);
-    }
-  };
-  const handleNext = () => {
-    if (currImageIdx < images.length - 1) {
-      setCurrImageIdx(currImageIdx + 1);
-    }
-  };
+  const [toggle, setToggle] = useState(true);
 
   return (
     <div>
-      <button onClick={handlePrevious}>Previous</button>
-      <img src={images[currImageIdx].url} alt="carousel" />
-      <button onClick={handleNext}>Next</button>
+      <button onClick={() => setToggle(!toggle)}>
+        Click me to Hide Element
+      </button>
+      {
+        toggle &&
+        <div>
+          Toggle Challenge
+        </div>
+      }
     </div>
   );
 }
